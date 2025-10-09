@@ -16,10 +16,14 @@ public class RouterValidator {
             "/api/forgotPassword/**", // Matches /api/forgotPassword and anything after it
             "/api/hotels/{id}",
             "/api/reviews/hotel/{hotelId}",
+<<<<<<< HEAD
             "/api/reviews/hotel/{hotelId}/average-rating",
             "/api/hotels/search",
             "/api/hotels/cards/unique-stays",
             "/api/hotels/cards/top-deals"
+=======
+            "/api/reviews/hotel/{hotelId}/average-rating"// AntPathMatcher correctly handles this variable
+>>>>>>> 6b108121c764c2eab2f8b9d384f795961519cbe1
     );
 
     // Instantiate AntPathMatcher
