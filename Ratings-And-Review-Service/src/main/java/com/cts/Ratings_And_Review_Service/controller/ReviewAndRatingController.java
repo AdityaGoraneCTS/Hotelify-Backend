@@ -55,6 +55,8 @@ public class ReviewAndRatingController {
 
     private void checkUser(String roles) {
         if (roles == null || !roles.contains("ROLE_USER")) {
+            // Log the unauthorized access attempt
+            System.out.println("Unauthorized access attempt. Roles: " + roles);
             throw new UnAuthorizedException("You are not authorized to perform this action.");
         }
     }

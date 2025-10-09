@@ -64,6 +64,20 @@ public class HotelController {
         return ResponseEntity.ok(hotels);
     }
 
+
+    // Optimized home page cards endpoints
+    @GetMapping("/cards/unique-stays")
+    public ResponseEntity<List<HotelDto>> getUniqueStaysCards() {
+        List<HotelDto> uniqueHotels = hotelService.getUniqueStaysCards();
+        return ResponseEntity.ok(uniqueHotels);
+    }
+
+    @GetMapping("/cards/top-deals")
+    public ResponseEntity<List<HotelDto>> getTopDealsCards() {
+        List<HotelDto> dealsHotels = hotelService.getTopDealsCards();
+        return ResponseEntity.ok(dealsHotels);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteHotel(@PathVariable String id,
                                             @RequestHeader("X-Roles") String roles,

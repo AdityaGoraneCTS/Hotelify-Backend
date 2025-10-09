@@ -29,6 +29,9 @@ public class AppSecurityConfig {
                     request.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/actuator/**", "/api/users/register", "/api/users/login", "/forgotPassword/**").permitAll();
                     request.requestMatchers("/api/users/**").hasAnyRole("USER", "ADMIN");
                     request.anyRequest().authenticated();
+
+
+
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 //                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

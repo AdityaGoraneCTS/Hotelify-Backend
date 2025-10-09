@@ -17,4 +17,7 @@ public interface HotelService {
     HotelDto updateFeaturesAndAmenities(String id, HotelFeaturesAmenitiesUpdateDto featuresAmenitiesUpdateDto);
     HotelDto updateHotelPolicies(String id, HotelPoliciesUpdateDto policiesUpdateDto);
     HotelDto updateRooms(String id, List<RoomUpdateDto> roomUpdates);
+    List<HotelDto> searchHotels(String location, String type);
+    List<HotelDto> getUniqueStaysCards();
+    List<HotelDto> getTopDealsCards();
 }

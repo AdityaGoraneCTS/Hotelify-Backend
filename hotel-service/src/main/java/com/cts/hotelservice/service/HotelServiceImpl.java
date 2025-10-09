@@ -22,10 +22,7 @@ public class HotelServiceImpl implements HotelService {
     private final HotelRepository hotelRepository;
     private final ModelMapper modelMapper;
 
-    public HotelServiceImpl(HotelRepository hotelRepository, ModelMapper modelMapper) {
-        this.hotelRepository = hotelRepository;
-        this.modelMapper = modelMapper;
-    }
+
 
     @Transactional
     @Override
@@ -52,9 +49,19 @@ public class HotelServiceImpl implements HotelService {
         return modelMapper.map(hotelOptional.get(), HotelDto.class);
     }
 
+
     @Override
     public List<HotelDto> getHotelsByManagerId(String managerId) {
         List<Hotel> hotels = hotelRepository.findByManagerId(managerId);
+        return hotels.stream()
+                .map(hotel -> modelMapper.map(hotel, HotelDto.class))
+                .collect(Collectors.toList());
+    }
+
+    //Get Hotels by Hotel name,City
+    @Override
+    public List<HotelDto> searchHotels(String location, String type) {
+        List<Hotel> hotels = hotelRepository.searchHotelsByLocationAndType(location, type);
         return hotels.stream()
                 .map(hotel -> modelMapper.map(hotel, HotelDto.class))
                 .collect(Collectors.toList());
@@ -211,6 +218,27 @@ public class HotelServiceImpl implements HotelService {
 
         Hotel updatedHotel = hotelRepository.save(existingHotel);
         return modelMapper.map(updatedHotel, HotelDto.class);
+    }
+
+    public HotelServiceImpl(HotelRepository hotelRepository, ModelMapper modelMapper) {
+        this.hotelRepository = hotelRepository;
+        this.modelMapper = modelMapper;
+    }
+
+    @Override
+    public List<HotelDto> getUniqueStaysCards() {
+        List<Hotel> hotels = hotelRepository.findUniqueStaysHotels();
+        return hotels.stream()
+                .map(hotel -> modelMapper.map(hotel, HotelDto.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<HotelDto> getTopDealsCards() {
+        List<Hotel> hotels = hotelRepository.findTopDealsHotels();
+        return hotels.stream()
+                .map(hotel -> modelMapper.map(hotel, HotelDto.class))
+                .collect(Collectors.toList());
     }
 }
 
