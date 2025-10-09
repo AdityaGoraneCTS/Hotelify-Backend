@@ -55,6 +55,15 @@ public class HotelController {
         return ResponseEntity.ok(hotelDtos);
     }
 
+    // Search Hotels By name and city
+    @GetMapping("/search")
+    public ResponseEntity<List<HotelDto>> searchHotels(
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) String type) {
+        List<HotelDto> hotels = hotelService.searchHotels(location, type);
+        return ResponseEntity.ok(hotels);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteHotel(@PathVariable String id,
                                             @RequestHeader("X-Roles") String roles,

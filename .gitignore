@@ -1,0 +1,2 @@
+# Ignore application.properties files within any subdirectory
+**/application.properties
